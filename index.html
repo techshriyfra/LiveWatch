@@ -45,15 +45,6 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
         }
-        select {
-            margin-top: 10px;
-            padding: 8px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            background: white;
-            color: black;
-        }
         .telegram-button {
             background-color: #0074d9;
             color: #ffffff;
@@ -71,20 +62,20 @@
             border-color: #ffffff;
         }
         .quality-select {
-                    margin-top: 20px;
-                }
-                .quality-select select {
-                    background-color: #00ff00;
-                    border: none;
-                    padding: 10px;
-                    font-size: 1rem;
-                    cursor: pointer;
-                    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
-                }
-                .quality-select select option {
-                    background-color: #0a0a0a;
-                    color: #00ff00;
-                }
+            margin-top: 20px;
+        }
+        .quality-select select {
+            background-color: #00ff00;
+            border: none;
+            padding: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+        }
+        .quality-select select option {
+            background-color: #0a0a0a;
+            color: #00ff00;
+        }
         @media (orientation: portrait) {
             video {
                 height: auto;
@@ -103,37 +94,67 @@
     
     <!-- Video Player -->
     <video id="video" controls autoplay></video>
-    
+
+    <!-- Quality Selection -->
+    <div class="quality-select">
+        <select id="quality-select" onchange="changeQuality()">
+            <option value="1080p">1080p</option>
+            <option value="720p">720p</option>
+            <option value="480p">480p</option>
+            <option value="360p" selected>360p</option>
+            <option value="240p">240p</option>
+            <option value="144p">144p</option>
+        </select>
+    </div>
+
     <!-- Join Telegram Button -->
     <a href="https://t.me/Tech_Shreyansh2" target="_blank" class="telegram-button">Join Telegram</a>
 
-    <script type='text/javascript' src='https://darkboylive.onrender.com/krYHEs-5E31pcJXqlWCEUllsDp9eU29yr39gY-bOuEvVQj9CL3FtqFAD-JrEKZsjroTSWqec2VumkAHK5MtWvw=='></script><script>
-                function changeQuality() {
-                    var quality = document.getElementById('quality-select').value;
-                    window.location.href = '/?quality=' + quality;
-                }
-            </script>
-        </head>
-        <body>
-            <div class="header">Darkboy's Live Cricket Stream</div>
-            <div class="container">
-                <div class="neon">Enjoy the Match!</div>
-                <div class="video-container">
-                    <video controls="" autoplay="">
-                        <source src="https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=662800.m3u8" type="application/x-mpegURL">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="quality-select">
-                    <select id="quality-select" onchange="changeQuality()">
-                        <option value="1080p">1080p</option>
-                        <option value="720p">720p</option>
-                        <option value="480p">480p</option>
-                        <option value="360p" selected="">360p</option>
-                        <option value="240p">240p</option>
-                        <option value="144p">144p</option>
-                    </select>
-                </div>
-            </div>
-        </body>
-        </html>
+    <script>
+        var video = document.getElementById("video");
+        var qualitySelector = document.getElementById("quality-select");
+        var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8"; // Replace with a working stream
+
+        var qualityMap = {
+            "1080p": "video=6628000.m3u8",
+            "720p": "video=3728000.m3u8",
+            "480p": "video=1828000.m3u8",
+            "360p": "video=662800.m3u8",
+            "240p": "video=462800.m3u8",
+            "144p": "video=262800.m3u8"
+        };
+
+        function changeQuality() {
+            var selectedQuality = qualitySelector.value;
+            var newStream = hlsStream.replace(/video=\d+\.m3u8/, qualityMap[selectedQuality]);
+            
+            if (Hls.isSupported()) {
+                hls.destroy(); // Destroy previous instance
+                hls = new Hls();
+                hls.loadSource(newStream);
+                hls.attachMedia(video);
+                video.play();
+            } else {
+                video.src = newStream;
+                video.play();
+            }
+        }
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(hlsStream);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = hlsStream;
+            video.addEventListener('loadedmetadata', function () {
+                video.play();
+            });
+        } else {
+            alert("Your browser does not support HLS playback.");
+        }
+    </script>
+</body>
+</html>
