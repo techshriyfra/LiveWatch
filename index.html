@@ -1,122 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ghost's Live Cricket Stream</title>
-  <link rel="icon" type="image/png" href="favicon.ico">
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-    body {
-      text-align: center;
-      background: #0a0a0a;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    .header {
-      font-family: 'Roboto', sans-serif;
-      background-color: #0a0a0a;
-      padding: 20px;
-      color: #00aeff;
-      font-size: 2.5rem;
-      text-transform: uppercase;
-      text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff;
-    }
-    video {
-      width: 90%;
-      max-width: 800px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
-    }
-    select {
-      margin-top: 10px;
-      padding: 8px;
-      font-size: 16px;
-      border-radius: 5px;
-      background: white;
-      color: black;
-    }
-    .telegram-button {
-      background-color: #0074d9;
-      color: #ffffff;
-      border-radius: 30px;
-      padding: 10px 20px;
-      font-size: 18px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      margin-top: 20px;
-    }
-    .telegram-button:hover {
-      background-color: #ffffff;
-      color: #0074d9;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost's Live Cricket Stream</title>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+        body {
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 25%, #1a1a1a 25%, #1a1a1a 50%, #0a0a0a 50%, #0a0a0a 75%, #1a1a1a 75%, #1a1a1a 100%);
+            background-size: 56.57px 56.57px;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .header {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0a0a0a;
+            padding: 20px;
+            color: #00aeff;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .neon {
+            color: #00aeff;
+            text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 40px #00aeff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        video {
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        .telegram-button {
+            background-color: #0074d9;
+            color: #ffffff;
+            border: 2px solid #0074d9;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .telegram-button:hover {
+            background-color: #ffffff;
+            color: #0074d9;
+            border-color: #ffffff;
+        }
+        .quality-select select {
+            background-color: #00ff00;
+            border: none;
+            padding: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+        }
+        .quality-select select option {
+            background-color: #0a0a0a;
+            color: #00ff00;
+        }
+    </style>
 </head>
 <body>
-  <div class="header">Ghost's Live Cricket Stream</div>
-  <video id="video" controls autoplay></video>
-  
-  <select id="qualitySelector">
-    <option value="-1">Auto (Best Quality)</option>
-  </select>
+    <div class="header">Ghost's Live Cricket Stream</div>
+    <div class="neon">Enjoy the Match!</div>
+    <video id="video" controls autoplay></video>
+    
+    <div class="quality-select">
+        <select id="quality-select" onchange="changeQuality()">
+            <option value="1080p" selected>1080p</option>
+            <option value="720p">720p</option>
+            <option value="480p">480p</option>
+            <option value="360p">360p</option>
+            <option value="240p">240p</option>
+            <option value="144p">144p</option>
+        </select>
+    </div>
+    
+    <a href="https://t.me/Tech_Shreyansh2" target="_blank" class="telegram-button">Join Telegram</a>
 
-  <a href="https://t.me/Tech_Shreyansh2" target="_blank" class="telegram-button">Join Telegram</a>
+    <script>
+        var video = document.getElementById("video");
+        var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8";
 
-  <script>
-    var video = document.getElementById("video");
-    var qualitySelector = document.getElementById("qualitySelector");
-    var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8";
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(hlsStream);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = hlsStream;
+            video.addEventListener('loadedmetadata', function () {
+                video.play();
+            });
+        } else {
+            alert("Your browser does not support HLS playback.");
+        }
 
-    if (Hls.isSupported()) {
-      var hls = new Hls();
-      hls.loadSource(hlsStream);
-      hls.attachMedia(video);
-
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.play();
-      });
-
-      hls.on(Hls.Events.LEVEL_LOADED, function () {
-        // Clear previous options
-        qualitySelector.innerHTML = '<option value="-1">Auto (Best Quality)</option>';
-        
-        hls.levels.forEach((level, index) => {
-          let option = document.createElement("option");
-          option.value = index;
-          option.textContent = `${level.height}p`;
-          qualitySelector.appendChild(option);
-        });
-
-        // Set initial quality based on current level
-        qualitySelector.value = hls.currentLevel;
-      });
-
-      // Listen for quality changes
-      hls.on(Hls.Events.LEVEL_SWITCHED, function (event, data) {
-        qualitySelector.value = data.level;
-      });
-
-      // Change quality when user selects an option
-      qualitySelector.addEventListener("change", function () {
-        let selectedQuality = parseInt(this.value);
-        hls.currentLevel = selectedQuality;
-      });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = hlsStream;
-      video.addEventListener('loadedmetadata', function () {
-        video.play();
-      });
-    } else {
-      alert("Your browser does not support HLS playback.");
-    }
-  </script>
+        function changeQuality() {
+            var quality = document.getElementById('quality-select').value;
+            window.location.href = '/?quality=' + quality;
+        }
+    </script>
 </body>
 </html>
