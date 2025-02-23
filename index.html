@@ -61,6 +61,13 @@
             color: #0074d9;
             border-color: #ffffff;
         }
+        .quality-select {
+            margin-top: 15px;
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+        }
         .quality-select select {
             background-color: #00ff00;
             border: none;
@@ -68,6 +75,8 @@
             font-size: 1rem;
             cursor: pointer;
             text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            border-radius: 15px;
+            margin: 0 10px;
         }
         .quality-select select option {
             background-color: #0a0a0a;
@@ -95,28 +104,43 @@
 
     <script>
         var video = document.getElementById("video");
-        var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8";
+        var hls;
+        var streams = {
+            "1080p": "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8",
+            "720p": "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8",
+            "480p": "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8",
+            "360p": "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8",
+            "240p": "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8",
+            "144p": "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8"
+        };
 
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(hlsStream);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = hlsStream;
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-            });
-        } else {
-            alert("Your browser does not support HLS playback.");
+        function loadStream(quality) {
+            if (Hls.isSupported()) {
+                if (hls) {
+                    hls.destroy();
+                }
+                hls = new Hls();
+                hls.loadSource(streams[quality]);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streams[quality];
+                video.addEventListener('loadedmetadata', function () {
+                    video.play();
+                });
+            } else {
+                alert("Your browser does not support HLS playback.");
+            }
         }
 
         function changeQuality() {
             var quality = document.getElementById('quality-select').value;
-            window.location.href = '/?quality=' + quality;
+            loadStream(quality);
         }
+
+        loadStream("1080p");
     </script>
 </body>
 </html>
