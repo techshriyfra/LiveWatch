@@ -45,10 +45,8 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
         }
-        .quality-container {
+        select {
             margin-top: 10px;
-        }
-        .quality-select {
             padding: 8px;
             font-size: 16px;
             border-radius: 5px;
@@ -92,19 +90,17 @@
     <video id="video" controls autoplay></video>
     
     <!-- Quality Selection -->
-    <div class="quality-container">
-        <select id="qualitySelector" class="quality-select">
-            <option value="-1">Auto (Best Quality)</option>
-        </select>
-    </div>
-
+    <select id="qualitySelector">
+        <option value="auto">Auto (Best Quality)</option>
+    </select>
+    
     <!-- Join Telegram Button -->
     <a href="https://t.me/Tech_Shreyansh2" target="_blank" class="telegram-button">Join Telegram</a>
 
     <script>
         var video = document.getElementById("video");
         var qualitySelector = document.getElementById("qualitySelector");
-        var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8"; // Master playlist with multiple qualities
+        var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8"; // Replace with a working stream
 
         if (Hls.isSupported()) {
             var hls = new Hls();
@@ -112,10 +108,8 @@
             hls.attachMedia(video);
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
                 video.play();
-
-                // Get available quality levels
-                let levels = hls.levels;
                 
+                let levels = hls.levels;
                 levels.forEach((level, index) => {
                     let qualityText = level.height + "p";
                     let option = document.createElement("option");
@@ -124,15 +118,16 @@
                     qualitySelector.appendChild(option);
                 });
 
-                // Change quality on selection
                 qualitySelector.addEventListener("change", function () {
-                    let qualityIndex = parseInt(this.value);
-                    hls.currentLevel = qualityIndex;
+                    let qualityIndex = this.value;
+                    if (qualityIndex === "auto") {
+                        hls.currentLevel = -1;
+                    } else {
+                        hls.currentLevel = parseInt(qualityIndex);
+                    }
                 });
             });
-
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            // Native HLS support (Safari)
             video.src = hlsStream;
             video.addEventListener('loadedmetadata', function () {
                 video.play();
