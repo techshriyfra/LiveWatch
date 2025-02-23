@@ -87,7 +87,7 @@
     <div class="neon">Enjoy the Match!</div>
     
     <!-- Video Player -->
-    <video id="video" controls autoplay></video>
+    <video id="video" controls autoplay playsinline></video>
     
     <!-- Quality Selection -->
     <select id="qualitySelector">
@@ -108,7 +108,6 @@
             hls.attachMedia(video);
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
                 video.play();
-                
                 let levels = hls.levels;
                 levels.reverse().forEach((level, index) => {
                     let qualityText = level.height + "p";
@@ -117,7 +116,6 @@
                     option.textContent = qualityText;
                     qualitySelector.appendChild(option);
                 });
-
                 qualitySelector.addEventListener("change", function () {
                     let qualityIndex = this.value;
                     if (qualityIndex === "auto") {
@@ -126,6 +124,23 @@
                         hls.currentLevel = parseInt(qualityIndex);
                     }
                 });
+            });
+            hls.on(Hls.Events.ERROR, function(event, data) {
+                if (data.fatal) {
+                    switch(data.type) {
+                        case Hls.ErrorTypes.NETWORK_ERROR:
+                            console.log("Network error, trying to recover...");
+                            hls.startLoad();
+                            break;
+                        case Hls.ErrorTypes.MEDIA_ERROR:
+                            console.log("Media error, attempting recovery...");
+                            hls.recoverMediaError();
+                            break;
+                        default:
+                            console.log("Fatal error, cannot recover.");
+                            break;
+                    }
+                }
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = hlsStream;
