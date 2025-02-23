@@ -87,11 +87,11 @@
     <div class="neon">Enjoy the Match!</div>
     
     <!-- Video Player -->
-    <video id="video" controls autoplay playsinline></video>
+    <video id="video" controls autoplay></video>
     
     <!-- Quality Selection -->
     <select id="qualitySelector">
-        <option value="auto">Auto (Best Quality)</option>
+        <option value="-1">Auto (Best Quality)</option>
     </select>
     
     <!-- Join Telegram Button -->
@@ -100,47 +100,29 @@
     <script>
         var video = document.getElementById("video");
         var qualitySelector = document.getElementById("qualitySelector");
-        var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8";
+        var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8"; // Replace with a working stream
 
         if (Hls.isSupported()) {
             var hls = new Hls();
             hls.loadSource(hlsStream);
             hls.attachMedia(video);
+            
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
                 video.play();
-                let levels = hls.levels;
-                levels.reverse().forEach((level, index) => {
-                    let qualityText = level.height + "p";
+            });
+
+            hls.on(Hls.Events.LEVEL_LOADED, function () {
+                qualitySelector.innerHTML = '<option value="-1">Auto (Best Quality)</option>';
+                hls.levels.forEach((level, index) => {
                     let option = document.createElement("option");
                     option.value = index;
-                    option.textContent = qualityText;
+                    option.textContent = `${level.height}p`;
                     qualitySelector.appendChild(option);
                 });
-                qualitySelector.addEventListener("change", function () {
-                    let qualityIndex = this.value;
-                    if (qualityIndex === "auto") {
-                        hls.currentLevel = -1;
-                    } else {
-                        hls.currentLevel = parseInt(qualityIndex);
-                    }
-                });
             });
-            hls.on(Hls.Events.ERROR, function(event, data) {
-                if (data.fatal) {
-                    switch(data.type) {
-                        case Hls.ErrorTypes.NETWORK_ERROR:
-                            console.log("Network error, trying to recover...");
-                            hls.startLoad();
-                            break;
-                        case Hls.ErrorTypes.MEDIA_ERROR:
-                            console.log("Media error, attempting recovery...");
-                            hls.recoverMediaError();
-                            break;
-                        default:
-                            console.log("Fatal error, cannot recover.");
-                            break;
-                    }
-                }
+
+            qualitySelector.addEventListener("change", function () {
+                hls.currentLevel = parseInt(this.value);
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = hlsStream;
