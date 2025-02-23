@@ -127,6 +127,25 @@
                     }
                 });
             });
+
+            hls.on(Hls.Events.ERROR, function(event, data) {
+                if (data.fatal) {
+                    switch (data.type) {
+                        case Hls.ErrorTypes.NETWORK_ERROR:
+                            console.error("Fatal network error encountered. Trying to recover.");
+                            hls.startLoad();
+                            break;
+                        case Hls.ErrorTypes.MEDIA_ERROR:
+                            console.error("Fatal media error encountered. Trying to recover.");
+                            hls.recoverMediaError();
+                            break;
+                        default:
+                            console.error("Unrecoverable error encountered.");
+                            hls.destroy();
+                            break;
+                    }
+                }
+            });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = hlsStream;
             video.addEventListener('loadedmetadata', function () {
