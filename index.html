@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Streaming</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"> <!-- Replace with your favicon URL -->
     <style>
         /* Modern CSS Styles */
         .ts-body {
@@ -145,27 +146,6 @@
         border-radius: 16px;
         transition: transform 0.3s ease;
         }
-        /* Orientation Handling */
-@media (orientation: portrait) {
-    .ts-player-container {
-        aspect-ratio: 9/16; /* Portrait mode aspect ratio */
-    }
-    .ts-controls {
-        bottom: 10px;
-        right: 10px;
-    }
-    .ts-control-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-    }
-}
-
-@media (orientation: landscape) {
-    .ts-player-container {
-        aspect-ratio: 16/9; /* Landscape mode aspect ratio */
-    }
-}
         /* Responsive Design */
         @media (max-width: 768px) {
         .ts-container {
@@ -366,37 +346,6 @@
         iframe.src = url;
         document.querySelector('.ts-logo-overlay').style.display = 'none';
     }
-    // Fullscreen Handling
-function toggleFullScreen() {
-    const player = document.querySelector('.ts-player-container');
-    if (!document.fullscreenElement) {
-        if (player.requestFullscreen) {
-            player.requestFullscreen();
-        } else if (player.webkitRequestFullscreen) { // Safari
-            player.webkitRequestFullscreen();
-        } else if (player.msRequestFullscreen) { // IE/Edge
-            player.msRequestFullscreen();
-        }
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { // Safari
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { // IE/Edge
-            document.msExitFullscreen();
-        }
-    }
-}
-
-// Orientation Change Listener
-window.addEventListener("orientationchange", function () {
-    const player = document.querySelector('.ts-player-container');
-    if (window.orientation === 90 || window.orientation === -90) {
-        player.style.aspectRatio = "16/9"; // Landscape
-    } else {
-        player.style.aspectRatio = "9/16"; // Portrait
-    }
-});
 
     // Fullscreen Handling
     function toggleFullScreen() {
