@@ -44,7 +44,7 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
         }
-        select {
+        select, input {
             margin-top: 10px;
             padding: 8px;
             font-size: 16px;
@@ -86,10 +86,7 @@
     <div class="neon">Enjoy the Match!</div>
     
     <!-- Video Player -->
-    <video id="video" controls autoplay>
-        <source id="videoSource" src="https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8" type="application/x-mpegURL">
-        Your browser does not support the video tag.
-    </video>
+    <video id="video" controls autoplay></video>
     
     <!-- Quality Selection -->
     <select id="qualitySelector" onchange="changeQuality()">
@@ -101,42 +98,77 @@
         <option value="240p">240p</option>
         <option value="144p">144p</option>
     </select>
+
+    <!-- Custom URL Input -->
+    <div>
+        <input type="text" id="customURL" placeholder="Enter custom URL" onkeypress="if(event.key === 'Enter'){changeCustomURL();}">
+        <button onclick="changeCustomURL()">Set URL</button>
+    </div>
     
     <!-- Join Telegram Button -->
     <a href="https://t.me/Tech_Shreyansh2" target="_blank" class="telegram-button">Join Telegram</a>
 
     <script>
+        var video = document.getElementById("video");
+        var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8";
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(hlsStream);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+
+                let levels = hls.levels;
+                let qualitySelector = document.getElementById("qualitySelector");
+                
+                levels.forEach((level, index) => {
+                    let qualityText = level.height + "p";
+                    let option = document.createElement("option");
+                    option.value = index;
+                    option.textContent = qualityText;
+                    qualitySelector.appendChild(option);
+                });
+
+                qualitySelector.addEventListener("change", function () {
+                    let qualityIndex = this.value;
+                    if (qualityIndex === "auto") {
+                        hls.currentLevel = -1;
+                    } else {
+                        hls.currentLevel = parseInt(qualityIndex);
+                    }
+                });
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = hlsStream;
+            video.addEventListener('loadedmetadata', function () {
+                video.play();
+            });
+        } else {
+            alert("Your browser does not support HLS playback.");
+        }
+
         function changeQuality() {
             var quality = document.getElementById('qualitySelector').value;
-            var videoSource = document.getElementById('videoSource');
-            var baseURL = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/";
-
-            switch (quality) {
-                case "1080p":
-                    videoSource.src = baseURL + "JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8";
-                    break;
-                case "720p":
-                    videoSource.src = baseURL + "JC_Sports18_1HD-audio_108038_eng=108000-video=1500000.m3u8";
-                    break;
-                case "480p":
-                    videoSource.src = baseURL + "JC_Sports18_1HD-audio_108038_eng=108000-video=1000000.m3u8";
-                    break;
-                case "360p":
-                    videoSource.src = baseURL + "JC_Sports18_1HD-audio_108038_eng=108000-video=750000.m3u8";
-                    break;
-                case "240p":
-                    videoSource.src = baseURL + "JC_Sports18_1HD-audio_108038_eng=108000-video=400000.m3u8";
-                    break;
-                case "144p":
-                    videoSource.src = baseURL + "JC_Sports18_1HD-audio_108038_eng=108000-video=200000.m3u8";
-                    break;
-                default:
-                    videoSource.src = baseURL + "JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8";
-                    break;
+            if (Hls.isSupported()) {
+                if (quality === "auto") {
+                    hls.currentLevel = -1;
+                } else {
+                    hls.currentLevel = parseInt(quality);
+                }
             }
+        }
 
-            var video = document.getElementById('video');
-            video.load();
+        function changeCustomURL() {
+            var customURL = document.getElementById('customURL').value;
+            if (Hls.isSupported()) {
+                hls.loadSource(customURL);
+                hls.attachMedia(video);
+                video.load();
+            } else {
+                video.src = customURL;
+                video.load();
+            }
         }
     </script>
 </body>
