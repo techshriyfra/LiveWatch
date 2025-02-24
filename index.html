@@ -3,26 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Streaming</title>
+    <title>Ghosts Live Stream</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"> <!-- Replace with your favicon URL -->
     <style>
-      .header {
-            font-family: 'Roboto', sans-serif;
-            background-color: #0a0a0a;
-            padding: 20px;
-            color: #00aeff;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
-        }
-        .neon {
-            color: #00aeff;
-            text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 40px #00aeff;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
+    /* Header Styles */
+.header {
+    font-family: 'Roboto', sans-serif;
+    background-color: #534949;
+    padding: 20px;
+    color: #00aeff;
+    font-size: 2.5rem; /* Default font size for desktop */
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    border-radius: 10px 10px 10px 10px;
+    text-align: center; /* Center the text */
+}
+
+/* Neon Text Styles */
+.neon {
+    color: #00aeff;
+    text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 40px #00aeff;
+    margin-bottom: 20px;
+    font-size: 1.5rem; /* Default font size for desktop */
+    text-align: center; /* Center the text */
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .header {
+        font-size: 1.8rem; /* Smaller font size for mobile */
+        padding: 15px; /* Adjust padding for mobile */
+    }
+
+    .neon {
+        font-size: 1.2rem; /* Smaller font size for mobile */
+    }
+}
+
+/* Responsive Design for Smaller Mobile Screens */
+@media (max-width: 480px) {
+    .header {
+        font-size: 1.5rem; /* Even smaller font size for very small screens */
+        padding: 10px; /* Adjust padding for very small screens */
+    }
+
+    .neon {
+        font-size: 1rem; /* Even smaller font size for very small screens */
+    }
+}
         /* Modern CSS Styles */
         .ts-body {
         margin: 0;
@@ -180,6 +210,16 @@
         bottom: 20px;
         right: 20px;
         }
+        @media (orientation: portrait) {
+            video {
+                height: auto;
+            }
+        }
+        @media (orientation: landscape) {
+            video {
+                height: 80vh;
+            }
+        }
         .ts-control-btn {
         width: 50px;
         height: 50px;
@@ -189,16 +229,16 @@
         </style>
 </head>
 <body class="ts-body">
-  <div class="header">Ghost's Live Cricket Stream</div>
-    <div class="neon">Enjoy the Match!</div>
     <div class="ts-container">
+        <div class="header">Ghost's Live Cricket Stream</div>
+    <div class="neon">Enjoy the Match!</div>
 <!-- Player Section -->
 <div class="ts-player-section">
 <div class="ts-player-container">
 <iframe allow="autoplay; encrypted-media" id="tsIframePlayer" src=""></iframe>
 <div class="ts-logo-overlay">
-<div>HitSixLiveV Player</div>
-<small>Select a channel</small>
+<div>Ghosts Stream Player</div>
+<small>Select a Channel</small>
 </div>
 </div>
 </div>
