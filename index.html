@@ -1,149 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghost's Live Cricket Stream</title>
-    <link rel="icon" type="image/png" href="favicon.ico">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-        body {
-            text-align: center;
-            background: linear-gradient(135deg, #0a0a0a 25%, #1a1a1a 25%, #1a1a1a 50%, #0a0a0a 50%, #0a0a0a 75%, #1a1a1a 75%, #1a1a1a 100%);
-            background-size: 56.57px 56.57px;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .header {
-            font-family: 'Roboto', sans-serif;
-            background-color: #0a0a0a;
-            padding: 20px;
-            color: #00ff00;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
-        }
-        .neon {
-            color: #00ff00;
-            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        video {
-            width: 90%;
-            max-width: 800px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
-        }
-        select {
-            margin-top: 10px;
-            padding: 8px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            background: white;
-            color: black;
-            cursor: pointer;
-        }
-        select option {
-            background-color: #0a0a0a;
-            color: #00ff00;
-        }
-        .telegram-button {
-            background-color: #0074d9;
-            color: #ffffff;
-            border: 2px solid #0074d9;
-            border-radius: 30px;
-            padding: 10px 20px;
-            font-size: 18px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-        .telegram-button:hover {
-            background-color: #ffffff;
-            color: #0074d9;
-            border-color: #ffffff;
-        }
-        @media (orientation: portrait) {
-            video {
-                height: auto;
-            }
-        }
-        @media (orientation: landscape) {
-            video {
-                height: 80vh;
-            }
-        }
-    </style>
-    <script>
-        function changeQuality(hls, level) {
-            if (level === "auto") {
-                hls.currentLevel = -1; // Auto
-            } else {
-                hls.currentLevel = parseInt(level);
-            }
-        }
-
-        window.addEventListener('load', function() {
-            var video = document.getElementById("video");
-            var qualitySelector = document.getElementById("qualitySelector");
-            var hlsStream = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8";
-
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(hlsStream);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.play();
-                    
-                    let levels = hls.levels;
-                    levels.forEach((level, index) => {
-                        let qualityText = `${level.height}p (${(level.bitrate / 1000).toFixed(0)}kbps)`;
-                        let option = document.createElement("option");
-                        option.value = index;
-                        option.textContent = qualityText;
-                        qualitySelector.appendChild(option);
-                    });
-
-                    qualitySelector.addEventListener("change", function () {
-                        changeQuality(hls, this.value);
-                    });
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = hlsStream;
-                video.addEventListener('loadedmetadata', function () {
-                    video.play();
-                });
-            } else {
-                alert("Your browser does not support HLS playback.");
-            }
-        });
-    </script>
-</head>
-<body>
-    <div class="header">Ghost's Live Cricket Stream</div>
-    <div class="neon">Enjoy the Match!</div>
-    
-    <!-- Video Player -->
-    <video id="video" controls autoplay></video>
-    
-    <!-- Quality Selection -->
-    <select id="qualitySelector">
-        <option value="auto">Auto (Best Quality)</option>
-    </select>
-    
-    <!-- Join Telegram Button -->
-    <a href="https://t.me/Tech_Shreyansh2" target="_blank" class="telegram-button">Join Telegram</a>
-</body>
-</html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Darkboy's Live Cricket Stream</title>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #0a0a0a;
+                    color: #f8f9fa;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background: linear-gradient(135deg, #0a0a0a 25%, #1a1a1a 25%, #1a1a1a 50%, #0a0a0a 50%, #0a0a0a 75%, #1a1a1a 75%, #1a1a1a 100%);
+                    background-size: 56.57px 56.57px;
+                }
+                .header {
+                    font-family: 'Roboto', sans-serif;
+                    background-color: #0a0a0a;
+                    padding: 20px;
+                    color: #00ff00;
+                    font-size: 2.5rem;
+                    text-transform: uppercase;
+                    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+                    margin-bottom: 20px;
+                }
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    text-align: center;
+                    background: rgba(0, 0, 0, 0.8);
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+                }
+                .neon {
+                    color: #00ff00;
+                    text-shadow:
+                        0 0 5px #00ff00,
+                        0 0 10px #00ff00,
+                        0 0 20px #00ff00,
+                        0 0 40px #00ff00;
+                    margin-bottom: 20px;
+                    font-size: 1.5rem;
+                }
+                .video-container {
+                    width: 100%;
+                    max-width: 1200px;
+                    background: #000;
+                    margin: 20px 0;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+                    border-radius: 10px;
+                }
+                .video-container iframe,
+                .video-container video {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                }
+                .quality-select {
+                    margin-top: 20px;
+                }
+                .quality-select select {
+                    background-color: #00ff00;
+                    border: none;
+                    padding: 10px;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+                }
+                .quality-select select option {
+                    background-color: #0a0a0a;
+                    color: #00ff00;
+                }
+            </style>
+            <script>
+                function changeQuality() {
+                    var quality = document.getElementById('quality-select').value;
+                    window.location.href = '/?quality=' + quality;
+                }
+            </script>
+        </head>
+        <body>
+            <div class="header">Darkboy's Live Cricket Stream</div>
+            <div class="container">
+                <div class="neon">Enjoy the Match!</div>
+                <div class="video-container">
+                    <video controls autoplay>
+                        <source src="https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8" type="application/x-mpegURL">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="quality-select">
+                    <select id="quality-select" onchange="changeQuality()">
+                        <option value="1080p" selected>1080p</option>
+                        <option value="720p" >720p</option>
+                        <option value="480p" >480p</option>
+                        <option value="360p" >360p</option>
+                        <option value="240p" >240p</option>
+                        <option value="144p" >144p</option>
+                    </select>
+                </div>
+            </div>
+        </body>
+        </html>
