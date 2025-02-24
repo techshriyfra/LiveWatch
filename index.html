@@ -56,6 +56,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             border-radius: 10px;
         }
+        .video-container iframe,
         .video-container video {
             width: 100%;
             height: auto;
@@ -77,62 +78,61 @@
             color: #00ff00;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        function getQualityFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('quality') || '1080p';
+        }
+
+        function getVideoSource(quality) {
+            const baseURL = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=";
+            const qualityMap = {
+                '1080p': '3728000',
+                '720p': '2728000',
+                '480p': '1728000',
+                '360p': '1280000',
+                '240p': '800000',
+                '144p': '400000'
+            };
+            return `${baseURL}${qualityMap[quality]}.m3u8`;
+        }
+
+        function changeQuality() {
+            const quality = document.getElementById('quality-select').value;
+            const videoElement = document.getElementById('video-player');
+            videoElement.src = getVideoSource(quality);
+            videoElement.load();
+            window.history.replaceState({}, '', `/?quality=${quality}`);
+        }
+
+        window.onload = function() {
+            const quality = getQualityFromURL();
+            document.getElementById('quality-select').value = quality;
+            const videoElement = document.getElementById('video-player');
+            videoElement.src = getVideoSource(quality);
+            videoElement.load();
+        }
+    </script>
 </head>
 <body>
     <div class="header">Darkboy's Live Cricket Stream</div>
     <div class="container">
         <div class="neon">Enjoy the Match!</div>
         <div class="video-container">
-            <video id="video" controls autoplay></video>
+            <video id="video-player" controls autoplay>
+                Your browser does not support the video tag.
+            </video>
         </div>
         <div class="quality-select">
             <select id="quality-select" onchange="changeQuality()">
-                <option value="auto" selected>Auto</option>
+                <option value="1080p">1080p</option>
+                <option value="720p">720p</option>
+                <option value="480p">480p</option>
+                <option value="360p">360p</option>
+                <option value="240p">240p</option>
+                <option value="144p">144p</option>
             </select>
         </div>
     </div>
-
-    <script>
-        const video = document.getElementById('video');
-        const qualitySelect = document.getElementById('quality-select');
-        let hls;
-
-        if (Hls.isSupported()) {
-            hls = new Hls();
-            hls.loadSource('https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8');
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                // Populate quality options
-                const levels = data.levels;
-                levels.forEach((level, index) => {
-                    const option = document.createElement('option');
-                    option.value = index;
-                    option.text = `${level.height}p`;
-                    qualitySelect.appendChild(option);
-                });
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740378932~acl=%2F*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=6029ae6ff841ccbb41d820a46f0a255ad02a678707e7c6ad9a63bd546d3ee24d/JC_Sports18_1HD-audio_108038_eng=108000-video=3728000.m3u8';
-            video.addEventListener('loadedmetadata', function () {
-                // Populate quality options (not available for native HLS)
-                const option = document.createElement('option');
-                option.value = 'auto';
-                option.text = 'Auto';
-                qualitySelect.appendChild(option);
-            });
-        }
-
-        function changeQuality() {
-            const quality = qualitySelect.value;
-            if (hls) {
-                if (quality === 'auto') {
-                    hls.currentLevel = -1; // Auto quality
-                } else {
-                    hls.currentLevel = parseInt(quality); // Set specific quality
-                }
-            }
-        }
-    </script>
 </body>
 </html>
