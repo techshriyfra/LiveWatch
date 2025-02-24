@@ -134,6 +134,32 @@
         position: relative;
         border: 2px solid rgba(255,255,255,0.1);
         }
+        /* Quality Selector Styles */
+.ts-quality-selector {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.ts-quality-selector label {
+    font-size: 16px;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.ts-quality-selector select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid #27ae60;
+    background: #2c2c2c;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.ts-quality-selector select:hover {
+    border-color: #2ecc71;
+}
         .ts-channel-card:hover {
         transform: scale(1.08) rotate(2deg);
         box-shadow: 0 12px 24px rgba(0,0,0,0.4);
@@ -177,6 +203,15 @@
 <div class="ts-player-section">
 <div class="ts-player-container">
 <iframe allow="autoplay; encrypted-media" id="tsIframePlayer" src=""></iframe>
+    <!-- Add this below the player section -->
+<div class="ts-quality-selector">
+    <label for="quality">Quality:</label>
+    <select id="quality" onchange="changeQuality(this.value)">
+        <option value="720">720p</option>
+        <option value="480">480p</option>
+        <option value="360">360p</option>
+    </select>
+</div>
 <div class="ts-logo-overlay">
 <div>HitSixLiveV Player</div>
 <small>Select a channel</small>
@@ -346,6 +381,37 @@
         iframe.src = url;
         document.querySelector('.ts-logo-overlay').style.display = 'none';
     }
+
+    // Function to change video quality
+function changeQuality(quality) {
+    const iframe = document.getElementById('tsIframePlayer');
+    const currentSrc = iframe.src;
+
+    // Extract the base URL without quality parameters
+    const baseUrl = currentSrc.split('?')[0];
+
+    // Update the iframe source based on selected quality
+    switch (quality) {
+        case '720':
+            iframe.src = `${baseUrl}?quality=720`;
+            break;
+        case '480':
+            iframe.src = `${baseUrl}?quality=480`;
+            break;
+        case '360':
+            iframe.src = `${baseUrl}?quality=360`;
+            break;
+        default:
+            iframe.src = baseUrl; // Default quality
+    }
+}
+
+// Function to play channel with quality
+function playChannel(url) {
+    const iframe = document.getElementById('tsIframePlayer');
+    iframe.src = url;
+    document.querySelector('.ts-logo-overlay').style.display = 'none';
+}
 
     // Fullscreen Handling
     function toggleFullScreen() {
