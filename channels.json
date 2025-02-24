@@ -22,6 +22,16 @@
       "url": "https://live.drmlive-02.workers.dev/jc/122.m3u8",
       "thumbnail": "https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"
     },
+    {
+      "name": "T Sports",
+      "url": "https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8",
+      "thumbnail": "https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj"
+    },
+    {
+      "name": "Willow TV",
+      "url": "https://anym3u8player.com/tv/p.php?url=https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8",
+      "thumbnail": "https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg"
+    }
      {
       "name": "T Sports",
       "url": "https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8",
