@@ -232,73 +232,35 @@
     <div class="ts-container">
         <div class="header">Ghost's Live Cricket Stream</div>
     <div class="neon">Enjoy the Match!</div>
-<!-- Player Section -->
-<div class="ts-player-section">
-<div class="ts-player-container">
-<iframe allow="autoplay; encrypted-media" id="tsIframePlayer" src=""></iframe>
-<div class="ts-logo-overlay">
-<div>Ghosts Stream Player</div>
-<small>Select a Channel</small>
-</div>
-</div>
-</div>
-<!-- Navigation Tabs -->
-<div class="ts-nav-tabs">
-<button class="ts-tab-btn active" onclick="showTab(&#39;all&#39;)">All Channels</button>
-<button class="ts-tab-btn" onclick="showTab(&#39;sports&#39;)">Sports</button>
-<button class="ts-tab-btn" onclick="showTab(&#39;indian&#39;)">Entertainment</button>
-<button class="ts-tab-btn" onclick="showTab(&#39;news&#39;)">News</button>
-</div>
-<!-- Channel Grids -->
-<div class="ts-channel-category" id="all">
-<div class="ts-channel-grid">
-<!-- All Channels -->
-<div class="ts-channel-card" onclick="playChannel(&#39;https://live.drmlive-02.workers.dev/jc/122.m3u8&#39;)">
-<img alt="Sports 18" class="ts-channel-thumb" src="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"/>
-</div>
-<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8&#39;)">
-<img alt="T Sports" class="ts-channel-thumb" src="https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj"/>
-</div>
-<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8&#39;)">
-<img alt="Willow TV" class="ts-channel-thumb" src="https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg"/>
-</div>
-<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://spt-sonykal-1-us.lg.wurl.tv/playlist.m3u8&#39;)">
-<img alt="Sony Kal" class="ts-channel-thumb" src="https://i.postimg.cc/m2w5PtvM/images-4.jpg"/>
-</div>
-<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/43e99595-3ab3-4f82-a828-0d32dc308c98/0.m3u8&#39;)">
-<img alt="sky" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg"/>
-</div>
-</div>
-</div>
-<div class="ts-channel-category" id="sports" style="display:none;">
-<div class="ts-channel-grid">
-<!-- Sports Channels (Add More Here) -->
-<div class="ts-channel-card" onclick="playChannel(&#39;https://live.drmlive-02.workers.dev/jc/122.m3u8&#39;)">
-<img alt="Sports 18" class="ts-channel-thumb" src="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"/>
-</div>
-<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8&#39;)">
-<img alt="T Sports" class="ts-channel-thumb" src="https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj"/>
-</div>
-<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8&#39;)">
-<img alt="Willow TV" class="ts-channel-thumb" src="https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg"/>
-</div>
-</div>
-</div>
-<div class="ts-channel-category" id="indian" style="display:none;">
-<div class="ts-channel-grid">
-<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://spt-sonykal-1-us.lg.wurl.tv/playlist.m3u8&#39;)">
-<img alt="Sony Kal" class="ts-channel-thumb" src="https://i.postimg.cc/m2w5PtvM/images-4.jpg"/>
-</div>
-<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/43e99595-3ab3-4f82-a828-0d32dc308c98/0.m3u8&#39;)">
-<img alt="BollHd" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg"/>
-</div>
-<div class="ts-channel-card" onclick="playChannel(&#39;https://userx534.protect-cdn.net/live/m3-720p.m3u8&#39;)">
-<img alt="BollHd" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg"/>
-</div>
-</div></div>
-<div class="ts-channel-category" id="news" style="display:none;">
-<div class="ts-channel-grid">
-<div id="score-frame"><a href="https://www.crictimes.org/cricket-scores" rel="nofollow">Live Cricket Scores</a></div><script type="text/javascript">var html = document.getElementById('score-frame');html.innerHTML = '<iframe frameborder='0' scrolling='yes' src='https://cwidget.crictimes.org/?v=1.1' style='width:100%;min-height: 460px;'></iframe>';</script></div></div>
+        <!-- Player Section -->
+        <div class="ts-player-section">
+            <div class="ts-player-container">
+                <iframe allow="autoplay; encrypted-media" id="tsIframePlayer" src=""></iframe>
+                <div class="ts-logo-overlay">
+                    <div>HitSixLiveV Player</div>
+                    <small>Select a channel</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="ts-nav-tabs">
+            <button class="ts-tab-btn active" onclick="showTab('all')">All Channels</button>
+            <button class="ts-tab-btn" onclick="showTab('sports')">Sports</button>
+            <button class="ts-tab-btn" onclick="showTab('indian')">Entertainment</button>
+            <button class="ts-tab-btn" onclick="showTab('news')">News</button>
+        </div>
+
+        <!-- Channel Grids -->
+        <div class="ts-channel-category" id="all">
+            <div class="ts-channel-grid"></div>
+        </div>
+        <div class="ts-channel-category" id="sports" style="display:none;">
+            <div class="ts-channel-grid"></div>
+        </div>
+        <div class="ts-channel-category" id="indian" style="display:none;">
+            <div class="ts-channel-grid"></div>
+        </div>
 <!-- Control Buttons -->
 <div class="ts-controls">
 <button class="ts-control-btn" onclick="toggleFullScreen()">⛶</button>
@@ -386,6 +348,52 @@
     }
 </script>
 <script>
+      // Fetch JSON data from GitHub
+        async function fetchChannels() {
+            const response = await fetch('https://raw.githubusercontent.com/techshriyfra/LiveWatch/refs/heads/main/channels.json');
+            const data = await response.json();
+            return data;
+        }
+
+        // Generate channel cards
+        function generateChannelCards(category, channels) {
+            const channelGrid = document.querySelector(`#${category} .ts-channel-grid`);
+            channelGrid.innerHTML = ''; // Clear existing content
+
+            channels.forEach(channel => {
+                const card = document.createElement('div');
+                card.className = 'ts-channel-card';
+                card.onclick = () => playChannel(channel.url);
+
+                const img = document.createElement('img');
+                img.className = 'ts-channel-thumb';
+                img.src = channel.thumbnail;
+                img.alt = channel.name;
+
+                card.appendChild(img);
+                channelGrid.appendChild(card);
+            });
+        }
+
+        // Load channels
+        async function loadChannels() {
+            const channels = await fetchChannels();
+
+            // Generate cards for each category
+            generateChannelCards('all', channels.all);
+            generateChannelCards('sports', channels.sports);
+            generateChannelCards('indian', channels.indian);
+        }
+
+        // Play channel
+        function playChannel(url) {
+            const iframe = document.getElementById('tsIframePlayer');
+            iframe.src = url;
+            document.querySelector('.ts-logo-overlay').style.display = 'none';
+        }
+
+        // Load channels when the page loads
+        window.onload = loadChannels;
     // Tab Navigation
     function showTab(tabId) {
         document.querySelectorAll('.ts-channel-category').forEach(cat => {
