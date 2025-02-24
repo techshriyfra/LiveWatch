@@ -2,38 +2,38 @@
     "all": [
       {
         "name": "Sports 18",
-        "url": "https://vkvsd14.okcdn.ru/cmaf/7966929783340/sig/x84muKF6EU4/expires/1740380574186/srcIp/172.69.178.72/urls/45.136.22.58/clientType/13/srcAg/CHROME/mid/9319446489900/get/hls_9319446489900.OnURj29hmec.m3u8",
+        "url": "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/hdntl=exp=1740389576~acl=%2f*~data=hdntl~hmac=ef50ebe52c8f3e1b45f3c7b34e0086513ac4157515bd13d82714759ae36ac568/Sports18_1_HD_voot_MOB-audio_108038_eng=108000-video=2297600.m3u8",
         "thumbnail": "https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"
       },
       {
         "name": "T Sports",
-        "url": "https://vkvsd14.okcdn.ru/cmaf/7966929783340/sig/x84muKF6EU4/expires/1740380574186/srcIp/172.69.178.72/urls/45.136.22.58/clientType/13/srcAg/CHROME/mid/9319446489900/get/hls_9319446489900.OnURj29hmec.m3u8",
+        "url": "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/hdntl=exp=1740389576~acl=%2f*~data=hdntl~hmac=ef50ebe52c8f3e1b45f3c7b34e0086513ac4157515bd13d82714759ae36ac568/Sports18_1_HD_voot_MOB-audio_108038_eng=108000-video=2297600.m3u8",
         "thumbnail": "https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj"
       },
       {
         "name": "Willow TV",
-        "url": "https://vkvsd14.okcdn.ru/cmaf/7966929783340/sig/x84muKF6EU4/expires/1740380574186/srcIp/172.69.178.72/urls/45.136.22.58/clientType/13/srcAg/CHROME/mid/9319446489900/get/hls_9319446489900.OnURj29hmec.m3u8",
+        "url": "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/hdntl=exp=1740389576~acl=%2f*~data=hdntl~hmac=ef50ebe52c8f3e1b45f3c7b34e0086513ac4157515bd13d82714759ae36ac568/Sports18_1_HD_voot_MOB-audio_108038_eng=108000-video=2297600.m3u8",
         "thumbnail": "https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg"
       }
     ],
     "sports": [
               {
         "name": "Sports 18",
-        "url": "https://vkvsd14.okcdn.ru/cmaf/7966929783340/sig/x84muKF6EU4/expires/1740380574186/srcIp/172.69.178.72/urls/45.136.22.58/clientType/13/srcAg/CHROME/mid/9319446489900/get/hls_9319446489900.OnURj29hmec.m3u8",
+        "url": "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/hdntl=exp=1740389576~acl=%2f*~data=hdntl~hmac=ef50ebe52c8f3e1b45f3c7b34e0086513ac4157515bd13d82714759ae36ac568/Sports18_1_HD_voot_MOB-audio_108038_eng=108000-video=2297600.m3u8",
         "thumbnail": "https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"
       },
       {
         "name": "T Sports",
-        "url": "https://vkvsd14.okcdn.ru/cmaf/7966929783340/sig/x84muKF6EU4/expires/1740380574186/srcIp/172.69.178.72/urls/45.136.22.58/clientType/13/srcAg/CHROME/mid/9319446489900/get/hls_9319446489900.OnURj29hmec.m3u8",
+        "url": "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/hdntl=exp=1740389576~acl=%2f*~data=hdntl~hmac=ef50ebe52c8f3e1b45f3c7b34e0086513ac4157515bd13d82714759ae36ac568/Sports18_1_HD_voot_MOB-audio_108038_eng=108000-video=2297600.m3u8",
         "thumbnail": "https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj"
       },
       {
         "name": "Willow TV",
-        "url": "https://vkvsd14.okcdn.ru/cmaf/7966929783340/sig/x84muKF6EU4/expires/1740380574186/srcIp/172.69.178.72/urls/45.136.22.58/clientType/13/srcAg/CHROME/mid/9319446489900/get/hls_9319446489900.OnURj29hmec.m3u8",
+        "url": "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/hdntl=exp=1740389576~acl=%2f*~data=hdntl~hmac=ef50ebe52c8f3e1b45f3c7b34e0086513ac4157515bd13d82714759ae36ac568/Sports18_1_HD_voot_MOB-audio_108038_eng=108000-video=2297600.m3u8",
         "thumbnail": "https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg"
       }
     ],
     "score": [
       
     ]
-  }
+}
