@@ -238,14 +238,14 @@
                 <iframe allow="autoplay; encrypted-media" id="tsIframePlayer" src=""></iframe>
                 <div class="ts-logo-overlay">
                     <div>Ghosts Player</div>
-                    <small>Select a Channel</small>
+                    <small>Select Channel</small>
                 </div>
             </div>
         </div>
 
         <!-- Navigation Tabs -->
         <div class="ts-nav-tabs">
-            <button class="ts-tab-btn active" onclick="showTab('all')">All Channels</button>
+            <button class="ts-tab-btn active" onclick="showTab('all')">Channels</button>
             <button class="ts-tab-btn" onclick="showTab('sports')">Sports</button>
             <button class="ts-tab-btn" onclick="showTab('score')">Score</button>
         </div>
@@ -343,7 +343,7 @@
         document.getElementById('alertBox').style.display = 'none';
     }
     function goToTelegram() {
-        window.location.href = "https://t.me/bhaukaaltech";
+        window.location.href = "https://telegram.me/Tech_Shreyansh";
     }
 </script>
 <script>
@@ -381,7 +381,7 @@
             // Generate cards for each category
             generateChannelCards('all', channels.all);
             generateChannelCards('sports', channels.sports);
-            generateChannelCards('indian', channels.indian);
+            generateChannelCards('score', channels.score);
         }
 
         // Play channel
