@@ -56,7 +56,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             border-radius: 10px;
         }
-        .video-container iframe,
         .video-container video {
             width: 100%;
             height: auto;
@@ -78,7 +77,11 @@
             color: #00ff00;
         }
     </style>
+    <!-- Include hls.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
+        let hls;
+
         function getQualityFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('quality') || '1080p';
@@ -97,21 +100,43 @@
             return `${baseURL}${qualityMap[quality]}.m3u8`;
         }
 
+        function loadVideo(quality) {
+            const videoElement = document.getElementById('video-player');
+            const videoSrc = getVideoSource(quality);
+
+            if (hls) {
+                hls.destroy();
+            }
+
+            if (Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(videoElement);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    videoElement.play();
+                });
+            } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+                // Native HLS support (e.g., Safari)
+                videoElement.src = videoSrc;
+                videoElement.addEventListener('loadedmetadata', function () {
+                    videoElement.play();
+                });
+            } else {
+                console.error('HLS is not supported in this browser.');
+            }
+        }
+
         function changeQuality() {
             const quality = document.getElementById('quality-select').value;
-            const videoElement = document.getElementById('video-player');
-            videoElement.src = getVideoSource(quality);
-            videoElement.load();
+            loadVideo(quality);
             window.history.replaceState({}, '', `/?quality=${quality}`);
         }
 
-        window.onload = function() {
+        window.onload = function () {
             const quality = getQualityFromURL();
             document.getElementById('quality-select').value = quality;
-            const videoElement = document.getElementById('video-player');
-            videoElement.src = getVideoSource(quality);
-            videoElement.load();
-        }
+            loadVideo(quality);
+        };
     </script>
 </head>
 <body>
@@ -119,9 +144,7 @@
     <div class="container">
         <div class="neon">Enjoy the Match!</div>
         <div class="video-container">
-            <video id="video-player" controls autoplay>
-                Your browser does not support the video tag.
-            </video>
+            <video id="video-player" controls autoplay></video>
         </div>
         <div class="quality-select">
             <select id="quality-select" onchange="changeQuality()">
