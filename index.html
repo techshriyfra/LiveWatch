@@ -1,411 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Premium Streaming</title>
-  <link rel="icon" type="image/png" href="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg" />
-  <style>
-    /* Modern CSS Styles */
-    .ts-body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-      color: #ffffff;
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-    }
-    .ts-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 30px 20px;
-    }
-    /* Player Section */
-    .ts-player-section {
-      position: relative;
-      margin-bottom: 40px;
-    }
-    .ts-player-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-      background: #000;
-      transition: transform 0.3s ease;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-    }
-    #tsIframePlayer {
-      width: 100%;
-      height: 100%;
-      border: none;
-      background-color: #000;
-    }
-    /* Overlay Elements */
-    .ts-logo-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 80, 60, 0.3) 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      font-size: 28px;
-      color: #fff;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(5px);
-      animation: tsPulse 2s infinite;
-    }
-    @keyframes tsPulse {
-      0% { opacity: 0.9; }
-      50% { opacity: 0.7; }
-      100% { opacity: 0.9; }
-    }
-    /* Control Elements */
-    .ts-controls {
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      display: flex;
-      gap: 15px;
-      z-index: 1000;
-    }
-    .ts-control-btn {
-      background: linear-gradient(45deg, #27ae60 0%, #2ecc71 100%);
-      color: white;
-      border: none;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      font-size: 28px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .ts-control-btn:hover {
-      transform: scale(1.15) rotate(90deg);
-      box-shadow: 0 12px 25px rgba(46, 204, 113, 0.4);
-    }
-    /* Navigation Tabs */
-    .ts-nav-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 30px 0;
-    }
-    .ts-tab-btn {
-      background: linear-gradient(45deg, #2c3e50 0%, #3498db 100%);
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-    }
-    .ts-tab-btn.active {
-      background: linear-gradient(45deg, #27ae60 0%, #2ecc71 100%);
-      box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
-    }
-    /* Channel Grid */
-    .ts-channel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    .ts-channel-card {
-      background: #2c2c2c;
-      border-radius: 18px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      aspect-ratio: 1;
-      position: relative;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-    }
-    .ts-channel-card:hover {
-      transform: scale(1.08) rotate(2deg);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-      border-color: #27ae60;
-    }
-    .ts-channel-thumb {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 16px;
-      transition: transform 0.3s ease;
-    }
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .ts-container {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Streaming</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"> <!-- Replace with your favicon URL -->
+    <style>
+      .header {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0a0a0a;
+            padding: 20px;
+            color: #00aeff;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .neon {
+            color: #00aeff;
+            text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 40px #00aeff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        /* Modern CSS Styles */
+        .ts-body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        }
+        .ts-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px 20px;
+        }
+        /* Player Section */
+        .ts-player-section {
+        position: relative;
+        margin-bottom: 40px;
+        }
+        .ts-player-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        background: #000;
+        transition: transform 0.3s ease;
+        border: 2px solid rgba(255,255,255,0.1);
+        }
+        #tsIframePlayer {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: #000;
+        }
+        /* Overlay Elements */
+        .ts-logo-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(0,0,0,0.9) 0%, rgba(0,80,60,0.3) 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 28px;
+        color: #fff;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        backdrop-filter: blur(5px);
+        animation: tsPulse 2s infinite;
+        }
+        @keyframes tsPulse {
+        0% { opacity: 0.9; }
+        50% { opacity: 0.7; }
+        100% { opacity: 0.9; }
+        }
+        /* Control Elements */
+        .ts-controls {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        display: flex;
+        gap: 15px;
+        z-index: 1000;
+        }
+        .ts-control-btn {
+        background: linear-gradient(45deg, #27ae60 0%, #2ecc71 100%);
+        color: white;
+        border: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        font-size: 28px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(46,204,113,0.3);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+        .ts-control-btn:hover {
+        transform: scale(1.15) rotate(90deg);
+        box-shadow: 0 12px 25px rgba(46,204,113,0.4);
+        }
+        /* Navigation Tabs */
+        .ts-nav-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 30px 0;
+        }
+        .ts-tab-btn {
+        background: linear-gradient(45deg, #2c3e50 0%, #3498db 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(52,152,219,0.3);
+        }
+        .ts-tab-btn.active {
+        background: linear-gradient(45deg, #27ae60 0%, #2ecc71 100%);
+        box-shadow: 0 4px 15px rgba(46,204,113,0.3);
+        }
+        /* Channel Grid */
+        .ts-channel-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+        }
+        .ts-channel-card {
+        background: #2c2c2c;
+        border-radius: 18px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        aspect-ratio: 1;
+        position: relative;
+        border: 2px solid rgba(255,255,255,0.1);
+        }
+        .ts-channel-card:hover {
+        transform: scale(1.08) rotate(2deg);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+        border-color: #27ae60;
+        }
+        .ts-channel-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+        transition: transform 0.3s ease;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+        .ts-container {
         padding: 15px;
-      }
-      .ts-channel-grid {
+        }
+        .ts-channel-grid {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 15px;
-      }
-      .ts-tab-btn {
+        }
+        .ts-tab-btn {
         padding: 12px 20px;
         font-size: 14px;
-      }
-      .ts-controls {
+        }
+        .ts-controls {
         bottom: 20px;
         right: 20px;
-      }
-      .ts-control-btn {
+        }
+        .ts-control-btn {
         width: 50px;
         height: 50px;
         font-size: 24px;
-      }
-    }
-    /* Quality Select Styles */
-    .quality-select {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .quality-select select {
-      background-color: #00ff00;
-      border: none;
-      padding: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
-    }
-    .quality-select select option {
-      background-color: #0a0a0a;
-      color: #00ff00;
-    }
-    /* Alert Box Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      background: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .alert-box {
-      background: #222;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    .alert-box img {
-      width: 50px;
-    }
-    .alert-box p {
-      color: #fff;
-      font-size: 18px;
-      margin: 10px 0;
-    }
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-    .btn {
-      background: #a52a2a;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .btn:hover {
-      opacity: 0.8;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
+        }
+        }
+        </style>
 </head>
 <body class="ts-body">
-  <div class="ts-container">
-    <!-- Player Section -->
-    <div class="ts-player-section">
-      <div class="ts-player-container">
-        <iframe allow="autoplay; encrypted-media" id="tsIframePlayer" src=""></iframe>
-        <div class="ts-logo-overlay">
-          <div>HitSixLiveV Player</div>
-          <small>Select a channel</small>
-        </div>
-      </div>
-    </div>
-    <!-- Navigation Tabs -->
-    <div class="ts-nav-tabs">
-      <button class="ts-tab-btn active" onclick="showTab('all')">All Channels</button>
-      <button class="ts-tab-btn" onclick="showTab('sports')">Sports</button>
-      <button class="ts-tab-btn" onclick="showTab('indian')">Entertainment</button>
-      <button class="ts-tab-btn" onclick="showTab('news')">News</button>
-    </div>
-    <!-- Channel Grids -->
-    <div class="ts-channel-category" id="all">
-      <div class="ts-channel-grid">
-        <!-- All Channels -->
-        <div class="ts-channel-card" onclick="playChannel('https://live.drmlive-02.workers.dev/jc/122.m3u8')">
-          <img alt="Sports 18" class="ts-channel-thumb" src="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg" />
-        </div>
-        <div class="ts-channel-card" onclick="playChannel('https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8')">
-          <img alt="T Sports" class="ts-channel-thumb" src="https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj" />
-        </div>
-        <div class="ts-channel-card" onclick="playChannel('https://anym3u8player.com/tv/p.php?url=https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8')">
-          <img alt="Willow TV" class="ts-channel-thumb" src="https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg" />
-        </div>
-        <div class="ts-channel-card" onclick="playChannel('https://anym3u8player.com/tv/p.php?url=https://spt-sonykal-1-us.lg.wurl.tv/playlist.m3u8')">
-          <img alt="Sony Kal" class="ts-channel-thumb" src="https://i.postimg.cc/m2w5PtvM/images-4.jpg" />
-        </div>
-        <div class="ts-channel-card" onclick="playChannel('https://anym3u8player.com/tv/p.php?url=https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/43e99595-3ab3-4f82-a828-0d32dc308c98/0.m3u8')">
-          <img alt="sky" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg" />
-        </div>
-      </div>
-    </div>
-    <div class="ts-channel-category" id="sports" style="display:none;">
-      <div class="ts-channel-grid">
-        <!-- Sports Channels -->
-        <div class="ts-channel-card" onclick="playChannel('https://live.drmlive-02.workers.dev/jc/122.m3u8')">
-          <img alt="Sports 18" class="ts-channel-thumb" src="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg" />
-        </div>
-        <div class="ts-channel-card" onclick="playChannel('https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8')">
-          <img alt="T Sports" class="ts-channel-thumb" src="https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj" />
-        </div>
-        <div class="ts-channel-card" onclick="playChannel('https://anym3u8player.com/tv/p.php?url=https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8')">
-          <img alt="Willow TV" class="ts-channel-thumb" src="https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg" />
-        </div>
-      </div>
-    </div>
-    <div class="ts-channel-category" id="indian" style="display:none;">
-      <div class="ts-channel-grid">
-        <div class="ts-channel-card" onclick="playChannel('https://anym3u8player.com/tv/p.php?url=https://spt-sonykal-1-us.lg.wurl.tv/playlist.m3u8')">
-          <img alt="Sony Kal" class="ts-channel-thumb" src="https://i.postimg.cc/m2w5PtvM/images-4.jpg" />
-        </div>
-        <div class="ts-channel-card" onclick="playChannel('https://anym3u8player.com/tv/p.php?url=https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/43e99595-3ab3-4f82-a828-0d32dc308c98/0.m3u8')">
-          <img alt="BollHd" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg" />
-        </div>
-        <div class="ts-channel-card" onclick="playChannel('https://userx534.protect-cdn.net/live/m3-720p.m3u8')">
-          <img alt="BollHd" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg" />
-        </div>
-      </div>
-    </div>
-    <div class="ts-channel-category" id="news" style="display:none;">
-      <div class="ts-channel-grid">
-        <div id="score-frame">
-          <a href="https://www.crictimes.org/cricket-scores" rel="nofollow">Live Cricket Scores</a>
-        </div>
-        <script type="text/javascript">
-          var html = document.getElementById('score-frame');
-          html.innerHTML = '<iframe frameborder="0" scrolling="yes" src="https://cwidget.crictimes.org/?v=1.1" style="width:100%;min-height: 460px;"></iframe>';
-        </script>
-      </div>
-    </div>
-    <!-- Quality Select Dropdown -->
-    <div class="quality-select">
-      <select id="quality-select" onchange="changeQuality()">
-        <option value="1080p" selected>1080p</option>
-        <option value="720p">720p</option>
-        <option value="480p">480p</option>
-        <option value="360p">360p</option>
-        <option value="240p">240p</option>
-        <option value="144p">144p</option>
-      </select>
-    </div>
-    <!-- Control Buttons -->
-    <div class="ts-controls">
-      <button class="ts-control-btn" onclick="toggleFullScreen()">⛶</button>
-    </div>
-  </div>
-  <!-- Alert Overlay -->
-  <div class="overlay" id="alertBox">
-    <div class="alert-box">
-      <img alt="Alert" src="https://vladsydorchuk.github.io/htmlcssjs_introduce/images/telegram.png" />
-      <p>Join our Telegram!</p>
-      <div class="buttons">
-        <button class="btn" onclick="closeAlert()">Close</button>
-        <button class="btn" onclick="goToTelegram()">Telegram</button>
-      </div>
-    </div>
-  </div>
-  <!-- External Script -->
-  <script type="text/javascript" src="https://darkboylive.onrender.com/Rf_iyzCl6bryafOgjf6QrX_h9596Ju707-H7l0W-In6e6yg5okMyW71t2qYO4Cu3kO6_Qx2NVwvNZF-_4JL6vw=="></script>
-  <script>
+  <div class="header">Ghost's Live Cricket Stream</div>
+    <div class="neon">Enjoy the Match!</div>
+    <div class="ts-container">
+<!-- Player Section -->
+<div class="ts-player-section">
+<div class="ts-player-container">
+<iframe allow="autoplay; encrypted-media" id="tsIframePlayer" src=""></iframe>
+<div class="ts-logo-overlay">
+<div>HitSixLiveV Player</div>
+<small>Select a channel</small>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="ts-nav-tabs">
+<button class="ts-tab-btn active" onclick="showTab(&#39;all&#39;)">All Channels</button>
+<button class="ts-tab-btn" onclick="showTab(&#39;sports&#39;)">Sports</button>
+<button class="ts-tab-btn" onclick="showTab(&#39;indian&#39;)">Entertainment</button>
+<button class="ts-tab-btn" onclick="showTab(&#39;news&#39;)">News</button>
+</div>
+<!-- Channel Grids -->
+<div class="ts-channel-category" id="all">
+<div class="ts-channel-grid">
+<!-- All Channels -->
+<div class="ts-channel-card" onclick="playChannel(&#39;https://live.drmlive-02.workers.dev/jc/122.m3u8&#39;)">
+<img alt="Sports 18" class="ts-channel-thumb" src="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"/>
+</div>
+<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8&#39;)">
+<img alt="T Sports" class="ts-channel-thumb" src="https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj"/>
+</div>
+<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8&#39;)">
+<img alt="Willow TV" class="ts-channel-thumb" src="https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg"/>
+</div>
+<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://spt-sonykal-1-us.lg.wurl.tv/playlist.m3u8&#39;)">
+<img alt="Sony Kal" class="ts-channel-thumb" src="https://i.postimg.cc/m2w5PtvM/images-4.jpg"/>
+</div>
+<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/43e99595-3ab3-4f82-a828-0d32dc308c98/0.m3u8&#39;)">
+<img alt="sky" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg"/>
+</div>
+</div>
+</div>
+<div class="ts-channel-category" id="sports" style="display:none;">
+<div class="ts-channel-grid">
+<!-- Sports Channels (Add More Here) -->
+<div class="ts-channel-card" onclick="playChannel(&#39;https://live.drmlive-02.workers.dev/jc/122.m3u8&#39;)">
+<img alt="Sports 18" class="ts-channel-thumb" src="https://i.ibb.co/ds1CnGcW/Uploaded-6910445402.jpg"/>
+</div>
+<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8&#39;)">
+<img alt="T Sports" class="ts-channel-thumb" src="https://yt3.googleusercontent.com/eY6Yt0YDmWSheMmneYNjUD_2N5p8r2nFca9CENifrZ9TugWxrQW24oznjqBJPOFmSs2M6avemg=s900-c-k-c0x00ffffff-no-rj"/>
+</div>
+<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8&#39;)">
+<img alt="Willow TV" class="ts-channel-thumb" src="https://i.ibb.co/6RmtG8zB/Uploaded-6910445402.jpg"/>
+</div>
+</div>
+</div>
+<div class="ts-channel-category" id="indian" style="display:none;">
+<div class="ts-channel-grid">
+<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://spt-sonykal-1-us.lg.wurl.tv/playlist.m3u8&#39;)">
+<img alt="Sony Kal" class="ts-channel-thumb" src="https://i.postimg.cc/m2w5PtvM/images-4.jpg"/>
+</div>
+<div class="ts-channel-card" onclick="playChannel(&#39;https://anym3u8player.com/tv/p.php?url=https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/bollywood-hd/43e99595-3ab3-4f82-a828-0d32dc308c98/0.m3u8&#39;)">
+<img alt="BollHd" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg"/>
+</div>
+<div class="ts-channel-card" onclick="playChannel(&#39;https://userx534.protect-cdn.net/live/m3-720p.m3u8&#39;)">
+<img alt="BollHd" class="ts-channel-thumb" src="https://i.postimg.cc/Dwh5PnTh/images-3.jpg"/>
+</div>
+</div></div>
+<div class="ts-channel-category" id="news" style="display:none;">
+<div class="ts-channel-grid">
+<div id="score-frame"><a href="https://www.crictimes.org/cricket-scores" rel="nofollow">Live Cricket Scores</a></div><script type="text/javascript">var html = document.getElementById('score-frame');html.innerHTML = '<iframe frameborder='0' scrolling='yes' src='https://cwidget.crictimes.org/?v=1.1' style='width:100%;min-height: 460px;'></iframe>';</script></div></div>
+<!-- Control Buttons -->
+<div class="ts-controls">
+<button class="ts-control-btn" onclick="toggleFullScreen()">⛶</button>
+</div>
+</div>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .alert-box {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .alert-box img {
+            width: 50px;
+        }
+        .alert-box p {
+            color: #fff;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .btn {
+            background: #a52a2a;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            opacity: 0.8;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+<!-- Player Section -->
+<div class="overlay" id="alertBox">
+<div class="alert-box">
+<img alt="Alert" src="https://vladsydorchuk.github.io/htmlcssjs_introduce/images/telegram.png"/>
+<p>Join our Telegram!</p>
+<div class="buttons">
+<button class="btn" onclick="closeAlert()">Close</button>
+<button class="btn" onclick="goToTelegram()">Telegram</button>
+</div>
+</div>
+</div><script>
+    function closeAlert() {
+        document.getElementById('alertBox').style.display = 'none';
+    }
+    function goToTelegram() {
+        window.location.href = "https://t.me/bhaukaaltech";
+    }
+</script>
+<script>
     // Tab Navigation
     function showTab(tabId) {
-      document.querySelectorAll('.ts-channel-category').forEach(cat => {
-        cat.style.display = 'none';
-      });
-      document.getElementById(tabId).style.display = 'block';
-
-      document.querySelectorAll('.ts-tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
+        document.querySelectorAll('.ts-channel-category').forEach(cat => {
+            cat.style.display = 'none';
+        });
+        document.getElementById(tabId).style.display = 'block';
+        
+        document.querySelectorAll('.ts-tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
     }
 
     // Channel Playback
     function playChannel(url) {
-      const iframe = document.getElementById('tsIframePlayer');
-      iframe.src = url;
-      document.querySelector('.ts-logo-overlay').style.display = 'none';
+        const iframe = document.getElementById('tsIframePlayer');
+        iframe.src = url;
+        document.querySelector('.ts-logo-overlay').style.display = 'none';
     }
 
     // Fullscreen Handling
     function toggleFullScreen() {
-      const player = document.querySelector('.ts-player-container');
-      if (!document.fullscreenElement) {
-        if (player.requestFullscreen) {
-          player.requestFullscreen();
-        } else if (player.webkitRequestFullscreen) {
-          player.webkitRequestFullscreen();
+        const player = document.querySelector('.ts-player-container');
+        if (!document.fullscreenElement) {
+            if (player.requestFullscreen) {
+                player.requestFullscreen();
+            } else if (player.webkitRequestFullscreen) {
+                player.webkitRequestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
         }
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
-      }
     }
-
-    // Quality Change Handling
-    function changeQuality() {
-      var quality = document.getElementById('quality-select').value;
-      window.location.href = '/?quality=' + quality;
-    }
-
-    // Alert Box Functions
-    function closeAlert() {
-      document.getElementById('alertBox').style.display = 'none';
-    }
-    function goToTelegram() {
-      window.location.href = "https://t.me/bhaukaaltech";
-    }
-  </script>
-</body>
-</html>
+</script>
