@@ -11,10 +11,10 @@
     font-family: 'Roboto', sans-serif;
     background-color: #000;
     padding: 20px;
-    color: #00aeff;
+    color: #00ff00;
     font-size: 2.5rem; /* Default font size for desktop */
     text-transform: uppercase;
-    text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff;
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
     border-radius: 10px 10px 10px 10px;
@@ -23,8 +23,8 @@
 
 /* Neon Text Styles */
 .neon {
-    color: #00aeff;
-    text-shadow: 0 0 5px #00aeff, 0 0 10px #00aeff, 0 0 20px #00aeff, 0 0 40px #00aeff;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00;
     margin-bottom: 20px;
     font-size: 1.5rem; /* Default font size for desktop */
     text-align: center; /* Center the text */
@@ -148,7 +148,7 @@
         margin: 30px 0;
         }
         .ts-tab-btn {
-        background: linear-gradient(45deg, #2c3e50 0%, #3498db 100%);
+        background: linear-gradient(45deg, #2c3e50 0%, #00ff00 100%);
         color: white;
         border: none;
         padding: 15px 30px;
@@ -229,6 +229,7 @@
         </style>
 </head>
 <body class="ts-body">
+    <div class="ts-wrapper"> 
     <div class="ts-container">
         <div class="header">Ghost's Streaming Now</div>
     <div class="neon">Enjoy the Match!</div>
@@ -312,7 +313,7 @@
             gap: 15px;
         }
         .btn {
-            background: #a52a2a;
+            background: #00ff00;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -327,18 +328,45 @@
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
+        /* Add a wrapper for the main content */
+.ts-wrapper {
+    flex: 1; /* This makes the wrapper take up the remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Footer Styles */
+.footer {
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    background-color: #1a1a1a; /* Match the background color */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Optional: Add a subtle border */
+    margin-top: auto; /* Push the footer to the bottom */
+}
+.footer a {
+            color: #00ff00;
+            text-decoration: none;
+            text-shadow: 0 0 5px #00ff00;
+        }
     </style>
 <!-- Player Section -->
 <div class="overlay" id="alertBox">
 <div class="alert-box">
-<img alt="Alert" src="https://vladsydorchuk.github.io/htmlcssjs_introduce/images/telegram.png"/>
+<img alt="Alert" src="https://i.ibb.co/Mk66J1sp/Uploaded-6910445402.png"/>
 <p>Join our Telegram!</p>
 <div class="buttons">
 <button class="btn" onclick="closeAlert()">Close</button>
 <button class="btn" onclick="goToTelegram()">Telegram</button>
 </div>
 </div>
-</div><script>
+</div>
+<div class="footer">
+    Made with ❤️ by <a href="https://telegram.me/Tech_Shreyansh2" target="_blank">Tech Shreyansh</a>
+</div>
+<script>
     function closeAlert() {
         document.getElementById('alertBox').style.display = 'none';
     }
